@@ -1,0 +1,5 @@
+CREATE DATABASE carshowroomdb;
+
+CREATE USER 'bober'@'localhost' IDENTIFIED BY 'Qwerty1-';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON carshowroomdb.* TO 'bober'@'localhost';
