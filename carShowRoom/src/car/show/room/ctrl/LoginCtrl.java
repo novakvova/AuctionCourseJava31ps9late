@@ -22,7 +22,7 @@ public class LoginCtrl {
     // Checks if the user credentials are valid or not.
     @RequestMapping(value = "/validate", method = RequestMethod.POST)
     public ModelAndView validateUsr(@RequestParam("username")String username, @RequestParam("password")String password) {
-        System.out.println("------Hello---------");
+        System.out.println("------Hello---------"+ username+" "+ password);
     	String msg = "";
         boolean isValid = authenticateService.findUser(username, password);
         log.info("Is user valid?= " + isValid);

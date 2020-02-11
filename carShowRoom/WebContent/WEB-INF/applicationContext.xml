@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<!-- Configuring the JDBC connection -->
 	<bean id="dataSourceBean"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -15,14 +17,19 @@
 	<bean id="sessionFactoryBean"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSourceBean" />
-		<property name="mappingResources">
-			<value>car/show/room/pojo/User.hbm.xml</value>
+		<!-- <property name="mappingResources"> <value>car/show/room/pojo/User.hbm.xml</value> 
+			</property> -->
+		<property name="annotatedClasses">
+			<list>
+				<value>car.show.room.pojo.User</value>
+
+			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 	</bean>
@@ -38,5 +45,7 @@
 		class="car.show.room.service.AuthService">
 		<property name="hibernateTemplate"
 			ref="hibernateTemplateBean" />
-	</bean> 
+		<property name="sessionFactory"
+			ref="sessionFactoryBean" />
+	</bean>
 </beans>
