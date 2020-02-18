@@ -14,14 +14,14 @@ import car.show.room.pojo.User;
 public class AuthService {
  
 	private SessionFactory sessionFactory;
-    private HibernateTemplate hibernateTemplate;
+    //private HibernateTemplate hibernateTemplate;
     private static Logger log = Logger.getLogger(AuthService.class);
  
     private AuthService() { }
  
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        this.hibernateTemplate = hibernateTemplate;
-    }
+//    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+//        this.hibernateTemplate = hibernateTemplate;
+//    }
     
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -31,12 +31,12 @@ public class AuthService {
     public boolean findUser(String uname, String upwd) {
         log.info("Checking the user in the database");
         boolean isValidUser = false;
-        String sqlQuery = "from User u where u.name=? and u.password=?";
+        //String sqlQuery = "from User u where u.username=? and u.password=?";
         try {
         	//SessionFactory sessionFactory = hibernateTemplate.getSessionFactory();
         	Session session = sessionFactory.openSession();
         	
-        	String hql = "FROM User u WHERE u.name = :uname and u.password=:upwd";
+        	String hql = "FROM User u WHERE u.username = :uname and u.password=:upwd";
         	Query query = session.createQuery(hql);
         	query.setParameter("uname",uname);
         	query.setParameter("upwd",upwd);

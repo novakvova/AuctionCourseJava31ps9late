@@ -18,7 +18,7 @@
     	</style>
 	</head>
     <body>
-        <h1 id="banner">Custom login form</h1>
+        <h1 id="banner">Login in site</h1>
         
         <!-- invalid credentials error msg -->
         <c:if test="${not empty error}">
@@ -34,11 +34,11 @@
         <form name="loginform" action="<c:url value='/login'/>" method="POST">
             <table>
                 <tr>
-                    <td>Nombre de usuario:</td>		<!-- Enter username -->
+                    <td>Email:</td>		<!-- Enter username -->
                     <td><input type='text' name='username' value=''></td>
                 </tr>
                 <tr>
-                    <td>Contraseña:</td>			<!-- Enter password -->
+                    <td>Password:</td>			<!-- Enter password -->
                     <td><input type='password' name='password' /></td>
                 </tr>
                 <tr>
