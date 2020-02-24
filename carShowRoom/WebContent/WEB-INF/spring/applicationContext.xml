@@ -43,6 +43,12 @@
 		<!-- <property name="hibernateTemplate" ref="hibernateTemplateBean" /> -->
 		<property name="sessionFactory" ref="sessionFactoryBean" />
 	</bean>
+	
+		<bean id="registrationService"
+		class="car.show.room.service.RegistrationService">
+		<!-- <property name="hibernateTemplate" ref="hibernateTemplateBean" /> -->
+		<property name="sessionFactory" ref="sessionFactoryBean" />
+	</bean>
 
 	<bean id="authenticationProviderBean"
 		class="car.show.room.service.CustomAuthenticationProvider">
