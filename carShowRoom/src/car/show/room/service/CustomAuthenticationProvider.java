@@ -24,9 +24,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	private static List<User> users = new ArrayList<User>();
 
 	public CustomAuthenticationProvider(SessionFactory sessionFactory) {
+		session = sessionFactory.openSession();
+		users=getUsers(session);
 		users.add(new User("erin", "123", "ROLE_ADMIN"));
 		users.add(new User("mike", "234", "ROLE_ADMIN"));
-		session = sessionFactory.openSession();
+		
+		
 		System.out.println("------Connection good---Security--");
 		//session.close();
 	}
@@ -53,7 +56,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		Authentication auth = new UsernamePasswordAuthenticationToken(name, password, grantedAuthorities);
 		return auth;
 	}
-
+	public List<User> getUsers(Session session) {
+	    return session.createQuery("SELECT a FROM User a", User.class).getResultList();      
+	}
 	@Override
 	public boolean supports(Class<?> authentication) {
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
