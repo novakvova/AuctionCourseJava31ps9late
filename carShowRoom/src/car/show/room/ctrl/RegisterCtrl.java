@@ -59,5 +59,6 @@ public class RegisterCtrl {
 	    }    
 	    return registered;
 	}
+	
 }
 

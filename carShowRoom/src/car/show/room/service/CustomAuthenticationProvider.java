@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+import org.hibernate.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +18,30 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import car.show.room.pojo.Role;
 import car.show.room.pojo.User;
 
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-	//@Autowired
+	// @Autowired
 	private Session session; // This will auto-inject the authentication service into the controller.
 	private static List<User> users = new ArrayList<User>();
+	@Autowired
+	private SessionFactory sessionFactory;
+	private RegistrationService service;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	public CustomAuthenticationProvider(SessionFactory sessionFactory) {
 		session = sessionFactory.openSession();
-		users=getUsers(session);
+		users = getUsers(session);
 		users.add(new User("erin", "123", "ROLE_ADMIN"));
 		users.add(new User("mike", "234", "ROLE_ADMIN"));
-		
-		
+
 		System.out.println("------Connection good---Security--");
-		//session.close();
+		// session.close();
 	}
 
 	@Override
@@ -44,6 +54,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			return null;
 		}
 		String password = credentials.toString();
+		System.out.println(name);
+		System.out.println(findByUsername(name).toString());
+		User user= findByUsername(name);
 
 		Optional<User> userOptional = users.stream().filter(u -> u.match(name, password)).findFirst();
 
@@ -52,17 +65,30 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		}
 
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-		grantedAuthorities.add(new SimpleGrantedAuthority(userOptional.get().getRole()));
+		for(Role role :user.getRoles()) {
+			grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
 		Authentication auth = new UsernamePasswordAuthenticationToken(name, password, grantedAuthorities);
 		return auth;
 	}
+
 	public List<User> getUsers(Session session) {
-	    return session.createQuery("SELECT a FROM User a", User.class).getResultList();      
+		return session.createQuery("SELECT a FROM User a", User.class).getResultList();
 	}
+
 	@Override
 	public boolean supports(Class<?> authentication) {
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
 		// return false;
+	}
+
+	private User findByUsername(String username) {
+		Session session = sessionFactory.openSession();
+		String hql = "FROM User u WHERE u.username = :uname";
+		Query query = session.createQuery(hql);
+		query.setParameter("uname", username);
+		User u = (User) query.uniqueResult();//getSingleResult();
+		return u;
 	}
 
 }
