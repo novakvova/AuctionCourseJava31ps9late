@@ -12,8 +12,6 @@
 		<h1>Message : ${message}</h1>
 		
 		<!-- displaying the logged in user details. -->
-		<c:if test="${pageContext.request.userPrincipal.name != null}">         
-	       <span>Welcome: ${pageContext.request.userPrincipal.name}</span> | <span><a id="logout" href="${pageContext.servletContext.contextPath}/logout">Logout</a></span>
-	    </c:if>
+
 	</body>
 </html>

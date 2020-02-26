@@ -1,6 +1,8 @@
 package car.show.room.service;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.Query;
 import javax.transaction.Transactional;
@@ -11,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import car.show.room.pojo.Role;
 import car.show.room.pojo.User;
 import car.show.room.pojo.UserDTO;
 import validation.EmailExistsException;
@@ -38,13 +41,28 @@ public class RegistrationService implements IRegistrationService {
 //		if (usernameExists(accountDto.getUsername())) {
 //			throw new EmailExistsException("There is an account with that email address:  + accountDto.getEmail());");
 //		}
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 		User user = new User();
 		user.setPassword(accountDto.getPassword());
-		user.setRole(accountDto.getRole());
+		//user.setRoles(new HashSet<Role>(getAllRoles()));
+		//for(Role role: getAllRoles()) {
+		Role role = new Role();
+		
+		role.setId(Long.parseLong(accountDto.getRole()));
+		//	role.getUsers().add(user);
+		user.getRoles().add(role);
+//		HashSet<User> set = new HashSet<User>();
+//			set.add(user);
+//			role.setUsers(set);
+			//System.out.println(role.getName());
+		//}
+		
 		user.setUsername(accountDto.getUsername());
-		Session session = sessionFactory.openSession();
+		
 		session.save(user);
-//		session.getTransaction().commit();
+		session.getTransaction().commit();
 		return user;
 	}
 
@@ -64,5 +82,8 @@ public class RegistrationService implements IRegistrationService {
 		User u = (User) query.getSingleResult();
 		return u;
 	}
-
+	public List<Role> getAllRoles() {
+		Session session = sessionFactory.openSession();
+	    return session.createQuery("SELECT a FROM Role a", Role.class).getResultList();      
+	}
 }
