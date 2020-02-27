@@ -34,12 +34,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		this.sessionFactory = sessionFactory;
 	}
 
+	
 	public CustomAuthenticationProvider(SessionFactory sessionFactory) {
 		session = sessionFactory.openSession();
 		users = getUsers(session);
 		users.add(new User("erin", "123", "ROLE_ADMIN"));
 		users.add(new User("mike", "234", "ROLE_ADMIN"));
-
+		this.sessionFactory=sessionFactory;
 		System.out.println("------Connection good---Security--");
 		// session.close();
 	}
@@ -55,7 +56,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		}
 		String password = credentials.toString();
 		System.out.println(name);
-		System.out.println(findByUsername(name).toString());
+		//System.out.println(findByUsername(name).toString());
 		User user= findByUsername(name);
 
 		Optional<User> userOptional = users.stream().filter(u -> u.match(name, password)).findFirst();
@@ -87,7 +88,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String hql = "FROM User u WHERE u.username = :uname";
 		Query query = session.createQuery(hql);
 		query.setParameter("uname", username);
-		User u = (User) query.uniqueResult();//getSingleResult();
+		query.setMaxResults(1);
+		User u = (User) query.getSingleResult();
 		return u;
 	}
 
