@@ -16,7 +16,7 @@
 				out.println("<p>" + request.getAttribute("product").toString() + "</p>");
 			}
 		%>
-	
+	<img alt="" src="request.getAttribute('product').getImage()">
 
 	</div>
 </body>

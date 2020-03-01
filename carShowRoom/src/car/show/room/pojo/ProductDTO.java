@@ -2,8 +2,22 @@ package car.show.room.pojo;
 
 public class ProductDTO {
 
+	private long id;
 	private String name;
 
+	public ProductDTO(long id, String name, String price, String description, String image, String category) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.image = image;
+		this.category = category;
+	}
+	public ProductDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	private String price;
 
 	private String description;
@@ -22,6 +36,15 @@ public class ProductDTO {
 
 	public String getPrice() {
 		return price;
+	}
+	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@Override

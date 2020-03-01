@@ -1,5 +1,8 @@
 package car.show.room.service;
 
+import java.util.List;
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,22 +17,15 @@ import car.show.room.pojo.User;
 public class ProductService  implements IProductService{
 
 	
-	@Autowired
-	private SessionFactory sessionFactory;
-	// private HibernateTemplate hibernateTemplate;
-	private static Logger log = Logger.getLogger(AuthService.class);
 
-//	public SessionFactory getSessionFactory() {
-//		return sessionFactory;
-//	}
+	private Session session;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+	public ProductService(SessionFactory sessionFactory) {
+		this.session = sessionFactory.openSession();
 	}
+	
 	@Override
 	public Product AddProduct(ProductDTO productdto) {
-	
-		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Product product = new Product();
 		product.setName(productdto.getName());
@@ -37,15 +33,53 @@ public class ProductService  implements IProductService{
 		product.setImage(productdto.getImage());
 		product.setDescription(productdto.getDescription());
 		Category category = new Category();
+		category.setId(Long.parseLong(productdto.getCategory()));
 		category.setName(productdto.getCategory());
 		category.setImage(productdto.getImage());
 		category.setDescription(productdto.getDescription());
-		session.save(category);
+//		session.save(category);
 		product.setCategory(category);
 		session.save(product);
 		session.getTransaction().commit();
 		return product;
 	}
+
+	@Override
+	public List<Product> GetAllProducts() {
+	    return session.createQuery("SELECT a FROM Product a", Product.class).getResultList();     
+	}
+	@Override
+	public Product GetById(long id) {
+		session.beginTransaction();
+		Product product = (Product)session.get(Product.class, id);
+		session.getTransaction().commit();
+		return product;
+		
+	}
+	@Override
+	public void Delete(long id) {
+		Product product = this.GetById(id);
+		session.beginTransaction();
+		session.delete(product);
+		session.getTransaction().commit();
+	}
+	@Override
+	public void Update(ProductDTO productDTO) {
+		Product product = this.GetById(productDTO.getId());
+		session.beginTransaction();
+		product.setDescription(productDTO.getDescription());
+		product.setImage(productDTO.getImage());
+		product.setName(productDTO.getImage());
+		product.setPrice(productDTO.getPrice());
+		long id = Long.parseLong(productDTO.getCategory());
+		Category cat = new Category();
+		cat.setId(id);
+		product.setCategory(cat);
+		session.update(product);
+		session.getTransaction().commit();
+	}
+	
+	
 
 
 }

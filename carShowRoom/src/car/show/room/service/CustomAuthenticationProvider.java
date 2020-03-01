@@ -55,12 +55,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			return null;
 		}
 		String password = credentials.toString();
-		System.out.println(name);
+		
 		//System.out.println(findByUsername(name).toString());
 		User user= findByUsername(name);
 
 		Optional<User> userOptional = users.stream().filter(u -> u.match(name, password)).findFirst();
-
+		System.out.println(userOptional.toString());
 		if (!userOptional.isPresent()) {
 			throw new BadCredentialsException("Authentication failed for " + name);
 		}
