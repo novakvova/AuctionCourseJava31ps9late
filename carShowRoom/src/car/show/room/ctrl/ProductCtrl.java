@@ -50,7 +50,8 @@ public class ProductCtrl {
 		return new ModelAndView("result", "product", productDTO);
 
 	}
-	//admin/products/edit/1
+
+	// admin/products/edit/1
 	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.GET)
 	public String showEditProductForm(@PathVariable("id") String id, WebRequest request, Model model) {
 		ProductEditDTO productEditDTO = new ProductEditDTO();
@@ -70,11 +71,40 @@ public class ProductCtrl {
 	}
 
 	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.POST)
-	public String editProduct(@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO, BindingResult result, ModelMap model) {
-		System.out.println("id"+id);
+	public String editProduct(@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO,
+			BindingResult result, ModelMap model) {
+		System.out.println("id" + id);
 		productDTO.setId(Long.valueOf(id));
 		System.out.println(productDTO.toString());
 		productService.Update(productDTO);
+		model.addAttribute("products", productService.GetAllProducts());
+		return "products";
+	}
+
+	@RequestMapping(value = "/products/delete/{id}", method = RequestMethod.GET)
+	public String showDeleteProductForm(@PathVariable("id") String id, WebRequest request, Model model) {
+		ProductEditDTO productEditDTO = new ProductEditDTO();
+		System.out.println("delete method method; id=" + id);
+		Product product = productService.GetById(Long.parseLong(id));
+		productEditDTO.setId(product.getId());
+		productEditDTO.setDescription(product.getDescription());
+		productEditDTO.setName(product.getName());
+		productEditDTO.setPrice(product.getPrice());
+		productEditDTO.setImage(product.getImage());
+
+		Long catId = product.getCategory().getId();
+		productEditDTO.setCategory_id(catId.toString());
+		productEditDTO.setCategories(categoryService.GetAllCategories());
+		model.addAttribute("productDelete", productEditDTO);
+		return "deleteproduct";
+	}
+
+	@RequestMapping(value = "/products/delete/{id}", method = RequestMethod.POST)
+	public String deleteProduct(@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO,
+			BindingResult result, ModelMap model) {
+		System.out.println("id" + id);
+		long deleteId = Long.parseLong(id);
+		productService.Delete(deleteId);
 		model.addAttribute("products", productService.GetAllProducts());
 		return "products";
 	}

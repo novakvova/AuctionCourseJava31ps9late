@@ -17,6 +17,7 @@
 				out.println("<p>" + request.getAttribute("product").toString() + "</p>");
 			}
 		%>
+
 		<a href="${pageContext.request.contextPath}/admin/products/add"
 			class="btn btn-success">Додати</a>
 		<table class="table table-striped table-sm table-dark">
@@ -26,6 +27,7 @@
 				<td>description</td>
 				<td>price</td>
 				<td>image</td>
+				<td>actions</td>
 			</tr>
 			<c:forEach items="${products}" var="product">
 
@@ -39,10 +41,13 @@
 					<td><a
 						href="${pageContext.request.contextPath}/admin/products/edit/${product.id}"
 						class="btn btn-primary">Редагувати</a>
-						<button class="btn btn-danger">Видалити</button></td>
+						<a
+						href="${pageContext.request.contextPath}/admin/products/delete/${product.id}"
+						class="btn btn-danger">Видалити</a>
 				</tr>
 			</c:forEach>
 		</table>
+
 
 
 
