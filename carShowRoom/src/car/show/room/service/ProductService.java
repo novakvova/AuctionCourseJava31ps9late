@@ -13,17 +13,16 @@ import car.show.room.pojo.Product;
 import car.show.room.pojo.ProductDTO;
 import car.show.room.pojo.Role;
 import car.show.room.pojo.User;
+import car.show.room.pojo.product.ProductEditDTO;
 
-public class ProductService  implements IProductService{
-
-	
+public class ProductService implements IProductService {
 
 	private Session session;
 
 	public ProductService(SessionFactory sessionFactory) {
 		this.session = sessionFactory.openSession();
 	}
-	
+
 	@Override
 	public Product AddProduct(ProductDTO productdto) {
 		session.beginTransaction();
@@ -46,16 +45,18 @@ public class ProductService  implements IProductService{
 
 	@Override
 	public List<Product> GetAllProducts() {
-	    return session.createQuery("SELECT a FROM Product a", Product.class).getResultList();     
+		return session.createQuery("SELECT a FROM Product a", Product.class).getResultList();
 	}
+
 	@Override
 	public Product GetById(long id) {
 		session.beginTransaction();
-		Product product = (Product)session.get(Product.class, id);
+		Product product = (Product) session.get(Product.class, id);
 		session.getTransaction().commit();
 		return product;
-		
+
 	}
+
 	@Override
 	public void Delete(long id) {
 		Product product = this.GetById(id);
@@ -63,23 +64,21 @@ public class ProductService  implements IProductService{
 		session.delete(product);
 		session.getTransaction().commit();
 	}
+
 	@Override
-	public void Update(ProductDTO productDTO) {
+	public void Update(ProductEditDTO productDTO) {
 		Product product = this.GetById(productDTO.getId());
 		session.beginTransaction();
 		product.setDescription(productDTO.getDescription());
 		product.setImage(productDTO.getImage());
-		product.setName(productDTO.getImage());
+		product.setName(productDTO.getName());
 		product.setPrice(productDTO.getPrice());
-		long id = Long.parseLong(productDTO.getCategory());
+		long id = Long.parseLong(productDTO.getCategory_id());
 		Category cat = new Category();
 		cat.setId(id);
 		product.setCategory(cat);
 		session.update(product);
 		session.getTransaction().commit();
 	}
-	
-	
-
 
 }

@@ -70,10 +70,12 @@ public class ProductCtrl {
 	}
 
 	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.POST)
-	public String editProduct(@PathVariable("id") String id, @ModelAttribute("productDTO") ProductDTO productDTO, BindingResult result, ModelMap model) {
+	public String editProduct(@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO, BindingResult result, ModelMap model) {
 		System.out.println("id"+id);
-		//productService.Update(productDTO);
-		
+		productDTO.setId(Long.valueOf(id));
+		System.out.println(productDTO.toString());
+		productService.Update(productDTO);
+		model.addAttribute("products", productService.GetAllProducts());
 		return "products";
 	}
 

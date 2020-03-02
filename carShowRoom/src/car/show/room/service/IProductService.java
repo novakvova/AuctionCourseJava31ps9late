@@ -6,6 +6,7 @@ import java.util.Set;
 import car.show.room.pojo.Category;
 import car.show.room.pojo.Product;
 import car.show.room.pojo.ProductDTO;
+import car.show.room.pojo.product.ProductEditDTO;
 
 public interface IProductService {
 	
@@ -15,5 +16,5 @@ public interface IProductService {
 	 List<Product> GetAllProducts();
 	 Product GetById(long id);
 	 void Delete(long id);
-	 void Update(ProductDTO productDTO);
+	 void Update(ProductEditDTO productDTO);
 }

@@ -47,12 +47,13 @@ public class ProductDTO {
 		this.id = id;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "ProductDTO [name=" + name + ", price=" + price + ", description=" + description + ", image=" + image
-				+ ", category=" + category + "]";
+		return "ProductDTO [id=" + id + ", name=" + name + ", price=" + price + ", description=" + description
+				+ ", image=" + image + ", category=" + category + "]";
 	}
-
 	public void setPrice(String price) {
 		this.price = price;
 	}

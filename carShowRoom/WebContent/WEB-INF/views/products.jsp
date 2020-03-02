@@ -19,25 +19,23 @@
 		%>
 		<a href="${pageContext.request.contextPath}/admin/products/add"
 			class="btn btn-success">Додати</a>
-		<table>
+		<table class="table table-striped table-sm table-dark">
 			<tr>
 				<td>id</td>
 				<td>name</td>
+				<td>description</td>
 				<td>price</td>
-				<td>size</td>
-				<td>rating</td>
+				<td>image</td>
 			</tr>
 			<c:forEach items="${products}" var="product">
 
 
 				<tr>
-
-
 					<td>${product.id}</td>
 					<td>${product.name}</td>
 					<td>${product.description}</td>
 					<td>${product.price}</td>
-
+					<td><img src="${product.image}" style="width: 50px"></td>
 					<td><a
 						href="${pageContext.request.contextPath}/admin/products/edit/${product.id}"
 						class="btn btn-primary">Редагувати</a>
