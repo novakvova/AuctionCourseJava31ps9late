@@ -1,20 +1,26 @@
-package car.show.room.pojo;
+package car.show.room.pojo.product;
 
-public class ProductDTO {
+import java.util.List;
+
+import car.show.room.pojo.Category;
+
+public class ProductEditDTO {
 
 	private long id;
 	private String name;
+	
+	public List<Category> categories;
 
-	public ProductDTO(long id, String name, String price, String description, String image, String category) {
+	public ProductEditDTO(long id, String name, String price, String description, String image, String category) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.description = description;
 		this.image = image;
-		this.category = category;
+		this.category_id = category;
 	}
-	public ProductDTO() {
+	public ProductEditDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -24,8 +30,9 @@ public class ProductDTO {
 
 	private String image;
 
-	private String category;
+	private String category_id;
 
+	
 	public String getName() {
 		return name;
 	}
@@ -50,7 +57,7 @@ public class ProductDTO {
 	@Override
 	public String toString() {
 		return "ProductDTO [name=" + name + ", price=" + price + ", description=" + description + ", image=" + image
-				+ ", category=" + category + "]";
+				+ ", category=" + category_id + "]";
 	}
 
 	public void setPrice(String price) {
@@ -72,14 +79,20 @@ public class ProductDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-
-	public String getCategory() {
-		return category;
+	public List<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+	public String getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(String category_id) {
+		this.category_id = category_id;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+	
 
 }
 

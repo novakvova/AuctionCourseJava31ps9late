@@ -17,21 +17,34 @@
 				out.println("<p>" + request.getAttribute("product").toString() + "</p>");
 			}
 		%>
-		<div class="card-deck">
+		<a href="${pageContext.request.contextPath}/admin/products/add"
+			class="btn btn-success">Додати</a>
+		<table>
+			<tr>
+				<td>id</td>
+				<td>name</td>
+				<td>price</td>
+				<td>size</td>
+				<td>rating</td>
+			</tr>
 			<c:forEach items="${products}" var="product">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top" src="${product.image}"
-						alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">${product.name}</h5>
-						<p class="card-text">${product.description}</p>
-						<p class="card-text">${product.price}</p>
-						<a href="#" class="btn btn-primary">Go somewhere</a>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
 
+
+				<tr>
+
+
+					<td>${product.id}</td>
+					<td>${product.name}</td>
+					<td>${product.description}</td>
+					<td>${product.price}</td>
+
+					<td><a
+						href="${pageContext.request.contextPath}/admin/products/edit/${product.id}"
+						class="btn btn-primary">Редагувати</a>
+						<button class="btn btn-danger">Видалити</button></td>
+				</tr>
+			</c:forEach>
+		</table>
 
 
 
