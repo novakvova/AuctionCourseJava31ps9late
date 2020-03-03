@@ -10,7 +10,9 @@
     <body>
         <div class="container">
             <h3 id="form_header" class="text-warning" align="center">Login Application</h3>
-            <div> </div>
+            <div> 
+             <a href="${pageContext.request.contextPath}/admin/products" class="btn btn-success">Product Admin</a>
+            </div>
      
             <!-- User input form to validate a user -->
             <c:url var="validateUrl" value="/user/validate" />

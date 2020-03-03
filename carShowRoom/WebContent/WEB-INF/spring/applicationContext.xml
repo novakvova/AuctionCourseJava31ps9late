@@ -23,6 +23,8 @@
 			<list>
 				<value>car.show.room.pojo.User</value>
 				<value>car.show.room.pojo.Role</value>
+				<value>car.show.room.pojo.Product</value>
+				<value>car.show.room.pojo.Category</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -65,11 +67,23 @@
 		<property name="sessionFactory" ref="sessionFactoryBean" />
 	</bean>
 
+	<!-- <bean id="productService" class="car.show.room.service.ProductService"> 
+		property name="hibernateTemplate" ref="hibernateTemplateBean" /> <property 
+		name="sessionFactory" ref="sessionFactoryBean" /> </bean> -->
+
 	<bean id="authenticationProviderBean"
 		class="car.show.room.service.CustomAuthenticationProvider">
 		<constructor-arg index="0" ref="sessionFactoryBean" />
 	</bean>
 
+	<bean id="productService" class="car.show.room.service.ProductService">
+		<constructor-arg name="sessionFactory"
+			ref="sessionFactoryBean" />
+	</bean>
+	<bean id="categoryService" class="car.show.room.service.CategoryService">
+		<constructor-arg name="sessionFactory"
+			ref="sessionFactoryBean" />
+	</bean>
 	<bean id="passwordEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 		<constructor-arg value="11" />
