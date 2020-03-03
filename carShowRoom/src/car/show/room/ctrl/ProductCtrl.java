@@ -43,11 +43,12 @@ public class ProductCtrl {
 	}
 
 	@RequestMapping(value = "/products/add", method = RequestMethod.POST)
-	public ModelAndView registerUserAccount(@ModelAttribute("product") ProductDTO productDTO, BindingResult result,
+	public String registerUserAccount(@ModelAttribute("product") ProductDTO productDTO, BindingResult result,
 			WebRequest request, Errors errors) {
 		Product prod = new Product();
 		prod = createProduct(productDTO, result);
-		return new ModelAndView("result", "product", productDTO);
+		return "redirect:/admin/products";
+		//return new ModelAndView("result", "product", productDTO);
 
 	}
 
@@ -77,8 +78,7 @@ public class ProductCtrl {
 		productDTO.setId(Long.valueOf(id));
 		System.out.println(productDTO.toString());
 		productService.Update(productDTO);
-		model.addAttribute("products", productService.GetAllProducts());
-		return "products";
+		return "redirect:/admin/products";
 	}
 
 	@RequestMapping(value = "/products/delete/{id}", method = RequestMethod.GET)
@@ -105,8 +105,7 @@ public class ProductCtrl {
 		System.out.println("id" + id);
 		long deleteId = Long.parseLong(id);
 		productService.Delete(deleteId);
-		model.addAttribute("products", productService.GetAllProducts());
-		return "products";
+		return "redirect:/admin/products";
 	}
 
 	private Product createProduct(ProductDTO productDTO, BindingResult result) {
