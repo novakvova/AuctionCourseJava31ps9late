@@ -44,6 +44,9 @@
 						<a
 						href="${pageContext.request.contextPath}/admin/products/delete/${product.id}"
 						class="btn btn-danger">Видалити</a>
+						<a
+						href="${pageContext.request.contextPath}/cart/buy/${product.id}"
+						class="btn btn-info">Додати у корзину</a>
 				</tr>
 			</c:forEach>
 		</table>
