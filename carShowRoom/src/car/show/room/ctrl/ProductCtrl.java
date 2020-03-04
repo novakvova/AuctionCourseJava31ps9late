@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import car.show.room.pojo.Product;
-import car.show.room.pojo.ProductDTO;
+import car.show.room.pojo.*;
 import car.show.room.pojo.product.ProductEditDTO;
 import car.show.room.service.CategoryService;
 import car.show.room.service.ProductService;
@@ -112,5 +111,6 @@ public class ProductCtrl {
 		Product prod = productService.AddProduct(productDTO);
 		return prod;
 	}
+	
 
 }
