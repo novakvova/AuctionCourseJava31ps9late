@@ -135,6 +135,7 @@
 			<p class="mdl-typography--font-light">Some features and devices
 				may not be available in all areas</p>
 		</div>
+		<img alt="" src="resources/images/1533415070161298164.jpg">
 
 	</footer>
 	<script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
