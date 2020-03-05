@@ -21,10 +21,11 @@ public class UploadCtlr {
 	    return "upload";
 	}
 	
-	@RequestMapping(value = "/admin/upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
 	public String submit(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
+		String name=file.getOriginalFilename();
 		long z=file.getSize();
-		System.out.println("file size "+z);
+		System.out.println("file size "+name+z);
 	    //modelMap.addAttribute("file", file);
 	    return "upload";
 	}
