@@ -2,6 +2,8 @@ package car.show.room.ctrl;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +74,6 @@ public class ProductCtrl {
 		System.out.println(productDTO.toString());
 		Product prod = new Product();
 		prod = createProduct(productDTO, result);
-
 		return "redirect:/admin/products";
 		
 
@@ -97,11 +98,28 @@ public class ProductCtrl {
 		return "editproduct";
 	}
 
-	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.POST)
-	public String editProduct(@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO,
-			BindingResult result, ModelMap model) {
+	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.POST,consumes = { "multipart/form-data" })
+	public String editProduct(@RequestParam("image") MultipartFile file,@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO,
+			BindingResult result, ModelMap model,HttpServletResponse response) throws IllegalStateException, IOException {
 		System.out.println("id" + id);
 		productDTO.setId(Long.valueOf(id));
+		response.setContentType("text/html;charset=UTF-8");
+		String name = file.getOriginalFilename();
+		long z = file.getSize();
+		System.out.println("file size " + name + z);
+
+		String filePath = context.getRealPath("/resources/images/"); // request.getServletContext().getRealPath("/uploads/");
+		System.out.println(filePath + name);
+		
+		if(!Files.exists(Paths.get(filePath + name))) { 
+			file.transferTo(new File(filePath + name));
+		}
+	
+		productDTO.setImage("../resources/images/"+name);
+		System.out.println(productDTO.toString());
+		
+		
+		
 		System.out.println(productDTO.toString());
 		productService.Update(productDTO);
 		return "redirect:/admin/products";

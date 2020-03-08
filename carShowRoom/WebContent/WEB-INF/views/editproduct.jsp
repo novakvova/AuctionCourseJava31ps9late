@@ -15,7 +15,8 @@
 	<main class="main">
 		<div class="container">
 			<h1 class="d-flex justify-content-center">Edit product</h1>
-			<form:form name="form"
+				<img id="prev" src="../../${productEdit.image}" width="100px"   onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png';" />
+			<form:form name="form" enctype="multipart/form-data"
 				action="${pageContext.request.contextPath}/admin/products/edit/${productEdit.id}"
 				method="post" modelAttribute="productEdit">
 				<div class="form-group">
@@ -33,9 +34,8 @@
 						id="description" />
 				</div>
 				<div class="form-group">
-					<label for="image">Image</label>
-					<form:input path="image" type="text" class="form-control"
-						id="image" />
+					<form:label path="image">Select a file to upload</form:label>
+			<form:input path="image" type="file" name="image"  onchange="document.getElementById('prev').src = window.URL.createObjectURL(this.files[0])"  />
 				</div>
 
 				<div class="form-group">
