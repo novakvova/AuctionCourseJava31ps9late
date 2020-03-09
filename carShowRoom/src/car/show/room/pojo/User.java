@@ -29,6 +29,14 @@ public class User implements Serializable {
     @Column(name = "password", length = 50, nullable = false)
     private String password;
     
+    @Column(name = "name", length = 50, nullable = false)
+    private String name;
+    @Column(name = "surname", length = 50, nullable = false)
+    private String surname;
+    @Column(name = "delivery", length = 50, nullable = false)
+    private String delivery;
+    @Column(name = "phone", length = 50, nullable = false)
+    private String phone;
 //    @Column(name = "role", length = 50, nullable = false)
 //    private String role;
     
@@ -36,10 +44,43 @@ public class User implements Serializable {
     @JoinTable(name="tblUserRoles", joinColumns= {@JoinColumn(name="user_id")},  inverseJoinColumns= {@JoinColumn(name="role_id")})
     private Set<Role> roles;
     
- 
-    @Override
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", roles=" + roles + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", surname="
+				+ surname + ", delivery=" + delivery + ", phone=" + phone + ", roles=" + roles + "]";
 	}
 
 	public User() {

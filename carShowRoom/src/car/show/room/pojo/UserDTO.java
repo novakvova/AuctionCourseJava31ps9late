@@ -1,10 +1,16 @@
 package car.show.room.pojo;
 
+import javax.persistence.Column;
+
 public class UserDTO {
 
-    @Override
+   
+
+
+	@Override
 	public String toString() {
-		return "UserDTO [username=" + username + ", password=" + password + ", role=" + role + "]";
+		return "UserDTO [username=" + username + ", password=" + password + ", role=" + role + ", name=" + name
+				+ ", surname=" + surname + ", delivery=" + delivery + ", phone=" + phone + "]";
 	}
 
 
@@ -14,6 +20,64 @@ public class UserDTO {
 	private String password;
   
     private String role;
+    
+    
+
+    public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+	public String getSurname() {
+		return surname;
+	}
+
+
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+
+
+	public String getDelivery() {
+		return delivery;
+	}
+
+
+
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
+
+
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
+
+	private String name;
+
+    private String surname;
+   
+    private String delivery;
+
+    private String phone;
 
 	public String getUsername() {
 		return username;
