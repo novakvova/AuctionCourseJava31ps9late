@@ -4,9 +4,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
+
 <body>
 	<h1>Add Product</h1>
-	<form:form method="POST" enctype="utf8" modelAttribute="product">
+		<img id="prev" src="${image}" width="100px" />
+	<form:form method="POST" enctype="multipart/form-data"
+		modelAttribute="product">
 		<div>
 			<form:label path="name">Name</form:label>
 			<form:input path="name" />
@@ -20,10 +23,9 @@
 			<form:input path="description" />
 		</div>
 		<div>
-			<form:label path="image">Image</form:label>
-			<form:input path="image" />
+			<form:label path="image">Select a file to upload</form:label>
+			<form:input path="image" type="file" name="image" onchange="document.getElementById('prev').src = window.URL.createObjectURL(this.files[0])" />
 		</div>
-
 		<select name="category">
 			<c:forEach items="${categories}" var="category">
 				<option value="${category.id}">${category.name}</option>
@@ -32,6 +34,9 @@
 
 		<input type="submit" value="Submit" />
 	</form:form>
+
+
+
 
 
 </body>

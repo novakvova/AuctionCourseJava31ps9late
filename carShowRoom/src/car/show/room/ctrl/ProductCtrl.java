@@ -1,5 +1,14 @@
 package car.show.room.ctrl;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +19,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import car.show.room.pojo.*;
@@ -27,11 +38,16 @@ public class ProductCtrl {
 	@Autowired
 	private CategoryService categoryService;
 
+	@Autowired
+	// private HttpServletRequest request;
+	ServletContext context;
+
 	@RequestMapping(value = "/products/add", method = RequestMethod.GET)
 	public String showRegistrationForm(WebRequest request, Model model) {
 		ProductDTO productDTO = new ProductDTO();
 		model.addAttribute("product", productDTO);
 		model.addAttribute("categories", categoryService.GetAllCategories());
+		model.addAttribute("file", "");
 		return "addproduct";
 	}
 
@@ -41,13 +57,25 @@ public class ProductCtrl {
 		return "products";
 	}
 
-	@RequestMapping(value = "/products/add", method = RequestMethod.POST)
-	public String registerUserAccount(@ModelAttribute("product") ProductDTO productDTO, BindingResult result,
-			WebRequest request, Errors errors) {
+	@RequestMapping(value = "/products/add", method = RequestMethod.POST, consumes = { "multipart/form-data" })
+	public String registerUserAccount(@RequestParam("image") MultipartFile file,
+			@ModelAttribute("product") ProductDTO productDTO, BindingResult result, WebRequest request, Errors errors,
+			HttpServletResponse response) throws IllegalStateException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		String name = file.getOriginalFilename();
+		long z = file.getSize();
+		System.out.println("file size " + name + z);
+
+		String filePath = context.getRealPath("/resources/images/"); // request.getServletContext().getRealPath("/uploads/");
+		System.out.println(filePath + name);
+
+		file.transferTo(new File(filePath + name));
+		productDTO.setImage("../resources/images/"+name);
+		System.out.println(productDTO.toString());
 		Product prod = new Product();
 		prod = createProduct(productDTO, result);
 		return "redirect:/admin/products";
-		//return new ModelAndView("result", "product", productDTO);
+		
 
 	}
 
@@ -70,11 +98,28 @@ public class ProductCtrl {
 		return "editproduct";
 	}
 
-	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.POST)
-	public String editProduct(@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO,
-			BindingResult result, ModelMap model) {
+	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.POST,consumes = { "multipart/form-data" })
+	public String editProduct(@RequestParam("image") MultipartFile file,@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO,
+			BindingResult result, ModelMap model,HttpServletResponse response) throws IllegalStateException, IOException {
 		System.out.println("id" + id);
 		productDTO.setId(Long.valueOf(id));
+		response.setContentType("text/html;charset=UTF-8");
+		String name = file.getOriginalFilename();
+		long z = file.getSize();
+		System.out.println("file size " + name + z);
+
+		String filePath = context.getRealPath("/resources/images/"); // request.getServletContext().getRealPath("/uploads/");
+		System.out.println(filePath + name);
+		
+		if(!Files.exists(Paths.get(filePath + name))) { 
+			file.transferTo(new File(filePath + name));
+		}
+	
+		productDTO.setImage("../resources/images/"+name);
+		System.out.println(productDTO.toString());
+		
+		
+		
 		System.out.println(productDTO.toString());
 		productService.Update(productDTO);
 		return "redirect:/admin/products";
@@ -111,6 +156,5 @@ public class ProductCtrl {
 		Product prod = productService.AddProduct(productDTO);
 		return prod;
 	}
-	
 
 }

@@ -20,5 +20,7 @@
         </tr>
     </table>
 </form:form>
+
+<!-- <img src="../resources/images/9d98c9ef8e6e492b061845f986ddc908.jpg">  -->
 </body>
 </html>

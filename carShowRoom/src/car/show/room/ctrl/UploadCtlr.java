@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import car.show.room.pojo.ProductDTO;
 import car.show.room.pojo.UserDTO;
+import car.show.room.service.CategoryService;
 
 @Controller
 public class UploadCtlr {
-	
+	@Autowired
+	private CategoryService categoryService;
 	@Autowired
     //private HttpServletRequest request;
 	ServletContext context;
@@ -33,7 +37,7 @@ public class UploadCtlr {
 	}
 	
 	@RequestMapping(value = "/admin/upload", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-	public String submit(@RequestParam("file") MultipartFile file, ModelMap modelMap, HttpServletRequest request ) throws IllegalStateException, IOException {
+	public ModelAndView  submit(@RequestParam("file") MultipartFile file, ModelMap modelMap, HttpServletRequest request ) throws IllegalStateException, IOException {
 		String name=file.getOriginalFilename();
 		long z=file.getSize();
 		System.out.println("file size "+name+z);
@@ -42,8 +46,16 @@ public class UploadCtlr {
 		System.out.println(filePath+name);
 		
 		file.transferTo(new File(filePath+name));
-		
+		request.setAttribute("filename", filePath+name);
+		request.setAttribute("product", new ProductDTO());
 	    //modelMap.addAttribute("file", file);
-	    return "upload";
+		ModelAndView mav = new ModelAndView("addproduct");
+		  mav.addObject("filename", name);
+		  mav.addObject("categories", categoryService.GetAllCategories());
+		  return mav;
+	//    return "addproduct";
 	}
+	
+	
+	
 }

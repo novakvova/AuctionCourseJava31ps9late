@@ -17,11 +17,11 @@
 	<main class="main">
 		<div class="container">
 			<h1 class="d-flex justify-content-center">Delete product</h1>
-			<form:form name="form"
+			<form:form name="form" 
 				action="${pageContext.request.contextPath}/admin/products/delete/${productDelete.id}"
 				method="post" modelAttribute="productDelete">
 				<div class="card" style="width: 18rem;">
-					<img class="card-img-top" name="image" src="${productDelete.image}" alt="Card image cap">
+					<img class="card-img-top" name="image" src="../../${productDelete.image}" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title" name="name">${productDelete.name}</h5>
 						<p class="card-text" name="description">${productDelete.description}</p>

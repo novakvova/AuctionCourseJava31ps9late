@@ -27,6 +27,7 @@
 				<td>description</td>
 				<td>price</td>
 				<td>image</td>
+				<td>Category</td>
 				<td>actions</td>
 			</tr>
 			<c:forEach items="${products}" var="product">
@@ -37,7 +38,8 @@
 					<td>${product.name}</td>
 					<td>${product.description}</td>
 					<td>${product.price}</td>
-					<td><img src="${product.image}" style="width: 50px"></td>
+					<td><img src="${product.image}" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png';" style="width: 50px"></td>
+					<td>${product.category.getName()}</td>
 					<td><a
 						href="${pageContext.request.contextPath}/admin/products/edit/${product.id}"
 						class="btn btn-primary">Редагувати</a>
