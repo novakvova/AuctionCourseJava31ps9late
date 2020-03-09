@@ -13,16 +13,20 @@
 	</div>
 	<div class="mdl-grid">
 		<div class="mdl-layout-spacer"></div>
-		<div class="mdl-cell mdl-cell--2-col">
-
+		<div class="mdl-cell mdl-cell--6-col">
+			<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+				<h2 class="mdl-card__title-text">ELECTION</h2>
+			</div>
 			<form:form method="POST" enctype="utf8" modelAttribute="user">
 				<div class="mdl-textfield mdl-js-textfield">
-					<input class="mdl-textfield__input" name="username" type="text"	id="username"> 
-					<label class="mdl-textfield__label"	for="username">Username</label>
+					<input class="mdl-textfield__input" name="username" type="text"
+						id="username"> <label class="mdl-textfield__label"
+						for="username">Username</label>
 				</div>
 				<div class="mdl-textfield mdl-js-textfield ">
 					<form:label class="mdl-textfield__label" path="password">Password</form:label>
-					<form:input class="mdl-textfield__input" type="password" path="password" />
+					<form:input class="mdl-textfield__input" type="password"
+						path="password" />
 				</div>
 				<div class="mdl-textfield mdl-js-textfield ">
 					<form:label class="mdl-textfield__label" path="role">Role</form:label>
