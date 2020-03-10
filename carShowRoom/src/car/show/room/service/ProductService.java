@@ -17,14 +17,17 @@ import car.show.room.pojo.product.ProductEditDTO;
 
 public class ProductService implements IProductService {
 
-	private Session session;
+	//private Session session;
+	private SessionFactory sessionFactory;
 
 	public ProductService(SessionFactory sessionFactory) {
-		this.session = sessionFactory.openSession();
+		this.sessionFactory=sessionFactory;
+		//this.session = sessionFactory.openSession();
 	}
 
 	@Override
 	public Product AddProduct(ProductDTO productdto) {
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Product product = new Product();
 		product.setName(productdto.getName());
@@ -40,19 +43,25 @@ public class ProductService implements IProductService {
 		product.setCategory(category);
 		session.save(product);
 		session.getTransaction().commit();
+		session.close();
 		return product;
 	}
 
 	@Override
 	public List<Product> GetAllProducts() {
-		return session.createQuery("SELECT a FROM Product a", Product.class).getResultList();
+		Session session = sessionFactory.openSession();
+		List<Product> list= session.createQuery("SELECT a FROM Product a", Product.class).getResultList();
+		session.close();
+		return list;
 	}
 
 	@Override
 	public Product GetById(long id) {
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Product product = (Product) session.get(Product.class, id);
 		session.getTransaction().commit();
+		session.close();
 		return product;
 
 	}
@@ -60,14 +69,18 @@ public class ProductService implements IProductService {
 	@Override
 	public void Delete(long id) {
 		Product product = this.GetById(id);
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.delete(product);
 		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
 	public void Update(ProductEditDTO productDTO) {
+		
 		Product product = this.GetById(productDTO.getId());
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		product.setDescription(productDTO.getDescription());
 		product.setImage(productDTO.getImage());
@@ -79,6 +92,7 @@ public class ProductService implements IProductService {
 		product.setCategory(cat);
 		session.update(product);
 		session.getTransaction().commit();
+		session.close();
 	}
 
 }

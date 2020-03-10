@@ -101,7 +101,8 @@ public class ProductCtrl {
 	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.POST,consumes = { "multipart/form-data" })
 	public String editProduct(@RequestParam("image") MultipartFile file,@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO,
 			BindingResult result, ModelMap model,HttpServletResponse response) throws IllegalStateException, IOException {
-		System.out.println("id" + id);
+		System.out.println("id POST" + id);
+		System.out.println("category id POST" + productDTO.getCategory_id());
 		productDTO.setId(Long.valueOf(id));
 		response.setContentType("text/html;charset=UTF-8");
 		String name = file.getOriginalFilename();

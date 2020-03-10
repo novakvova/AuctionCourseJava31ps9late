@@ -53,7 +53,7 @@
 				<div class="android-navigation-container">
 					<nav class="android-navigation mdl-navigation">
 						<a class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">Smart Watch</a> <a
+							href="${pageContext.request.contextPath}/admin/products">Продукти</a> <a
 							class="mdl-navigation__link mdl-typography--text-uppercase"
 							href="">Phones</a> <a
 							class="mdl-navigation__link mdl-typography--text-uppercase"
@@ -63,7 +63,7 @@
 							class="mdl-navigation__link mdl-typography--text-uppercase"
 							href="">Laptop</a> <a
 							class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">Basket (0)</a>
+							href="${pageContext.request.contextPath}/cart/index">Корзина</a>
 					</nav>
 				</div>
 				<span class="android-mobile-title mdl-layout-title"> <img

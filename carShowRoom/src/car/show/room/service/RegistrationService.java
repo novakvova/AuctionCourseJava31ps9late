@@ -48,6 +48,11 @@ public class RegistrationService implements IRegistrationService {
 		user.setPassword(accountDto.getPassword());
 		//user.setRoles(new HashSet<Role>(getAllRoles()));
 		//for(Role role: getAllRoles()) {
+		user.setDelivery(accountDto.getDelivery());
+		user.setName(accountDto.getName());
+		user.setPhone(accountDto.getPhone());
+		user.setSurname(accountDto.getSurname());
+		
 		Role role = new Role();
 		
 		role.setId(Long.parseLong(accountDto.getRole()));
