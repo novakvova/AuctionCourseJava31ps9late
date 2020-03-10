@@ -37,9 +37,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
 	public CustomAuthenticationProvider(SessionFactory sessionFactory) {
 		session = sessionFactory.openSession();
-		users = getUsers(session);
-		users.add(new User("erin", "123", "ROLE_ADMIN"));
-		users.add(new User("mike", "234", "ROLE_ADMIN"));
+		//users = getUsers(session, username);
+//		users.add(new User("erin", "123", "ROLE_ADMIN"));
+//		users.add(new User("mike", "234", "ROLE_ADMIN"));
 		this.sessionFactory=sessionFactory;
 		System.out.println("------Connection good---Security--");
 		// session.close();
@@ -49,7 +49,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String name = authentication.getName();
 		Object credentials = authentication.getCredentials();
-		System.out.println("credentials class: " + credentials.getClass());
+		System.out.println("credentials class: " + credentials.toString());
 
 		if (!(credentials instanceof String)) {
 			return null;
@@ -58,23 +58,24 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		
 		//System.out.println(findByUsername(name).toString());
 		User user= findByUsername(name);
-
-		Optional<User> userOptional = users.stream().filter(u -> u.match(name, password)).findFirst();
-		System.out.println(userOptional.toString());
-		if (!userOptional.isPresent()) {
+		
+		
+		if(user==null) {
+			
 			throw new BadCredentialsException("Authentication failed for " + name);
 		}
-
+		else
+			System.out.println("--------- "+user);
+		if(!user.getPassword().equals(password))
+		{
+			throw new BadCredentialsException("Authentication failed for " + name);
+		}
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 		for(Role role :user.getRoles()) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 		}
 		Authentication auth = new UsernamePasswordAuthenticationToken(name, password, grantedAuthorities);
 		return auth;
-	}
-
-	public List<User> getUsers(Session session) {
-		return session.createQuery("SELECT a FROM User a", User.class).getResultList();
 	}
 
 	@Override
@@ -89,7 +90,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		Query query = session.createQuery(hql);
 		query.setParameter("uname", username);
 		query.setMaxResults(1);
-		User u = (User) query.getSingleResult();
+		User u;
+		try {
+			u = (User)query.getSingleResult();
+		}
+		catch(Exception ex) {
+			u=null;
+		}
 		return u;
 	}
 

@@ -54,7 +54,7 @@
 					</div>
 					<div class="mdl-textfield mdl-js-textfield ">
 						<label class="mdl-textfield__label" path="password">Password</label>
-						<input class="mdl-textfield__input" type="password"
+						<input class="mdl-textfield__input" type="password" name="password"
 							path="password" />
 					</div>
 					<div class="mdl-grid">
