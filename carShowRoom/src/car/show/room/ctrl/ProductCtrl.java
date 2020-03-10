@@ -70,12 +70,11 @@ public class ProductCtrl {
 		System.out.println(filePath + name);
 
 		file.transferTo(new File(filePath + name));
-		productDTO.setImage("../resources/images/"+name);
+		productDTO.setImage("../resources/images/" + name);
 		System.out.println(productDTO.toString());
 		Product prod = new Product();
 		prod = createProduct(productDTO, result);
 		return "redirect:/admin/products";
-		
 
 	}
 
@@ -98,9 +97,10 @@ public class ProductCtrl {
 		return "editproduct";
 	}
 
-	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.POST,consumes = { "multipart/form-data" })
-	public String editProduct(@RequestParam("image") MultipartFile file,@PathVariable("id") String id, @ModelAttribute("productDTO") ProductEditDTO productDTO,
-			BindingResult result, ModelMap model,HttpServletResponse response) throws IllegalStateException, IOException {
+	@RequestMapping(value = "/products/edit/{id}", method = RequestMethod.POST, consumes = { "multipart/form-data" })
+	public String editProduct(@RequestParam("image") MultipartFile file, @PathVariable("id") String id,
+			@ModelAttribute("productDTO") ProductEditDTO productDTO, BindingResult result, ModelMap model,
+			HttpServletResponse response) throws IllegalStateException, IOException {
 		System.out.println("id POST" + id);
 		System.out.println("category id POST" + productDTO.getCategory_id());
 		productDTO.setId(Long.valueOf(id));
@@ -111,16 +111,14 @@ public class ProductCtrl {
 
 		String filePath = context.getRealPath("/resources/images/"); // request.getServletContext().getRealPath("/uploads/");
 		System.out.println(filePath + name);
-		
-		if(!Files.exists(Paths.get(filePath + name))) { 
+
+		if (!Files.exists(Paths.get(filePath + name))) {
 			file.transferTo(new File(filePath + name));
 		}
-	
-		productDTO.setImage("../resources/images/"+name);
+
+		productDTO.setImage("../resources/images/" + name);
 		System.out.println(productDTO.toString());
-		
-		
-		
+
 		System.out.println(productDTO.toString());
 		productService.Update(productDTO);
 		return "redirect:/admin/products";
@@ -156,6 +154,13 @@ public class ProductCtrl {
 	private Product createProduct(ProductDTO productDTO, BindingResult result) {
 		Product prod = productService.AddProduct(productDTO);
 		return prod;
+	}
+
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String showMainPage(WebRequest request, Model model) {
+		model.addAttribute("products", productService.GetAllProducts());
+		model.addAttribute("categories", categoryService.GetAllCategories());
+		return "main";
 	}
 
 }

@@ -3,7 +3,10 @@ package car.show.room.service;
 import java.util.List;
 import java.util.Set;
 
+
+
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +96,16 @@ public class ProductService implements IProductService {
 		session.update(product);
 		session.getTransaction().commit();
 		session.close();
+	}
+
+	@Override
+	public List<Product> GetProductsbyCategory(long categoryid) {
+		Session session = sessionFactory.openSession();
+		Query query= session.createQuery("SELECT a FROM Product a where a.category_id=:categoryid");
+		query.setParameter("categoryid", categoryid);
+		List<Product> list=query.list();
+		session.close();
+		return list;
 	}
 
 }
