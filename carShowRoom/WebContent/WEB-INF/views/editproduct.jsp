@@ -72,9 +72,17 @@
 <!-- 					<label class="mdl-textfield__label" for="category">Виберіть -->
 <!-- 						категорію</label> -->
 						 <select name="category_id" class="mdl-textfield__input">
-							<option value="${productEdit.category_id}">${productEdit.categories.get(productEdit.category_id).getName()}</option>
+							<!-- <option value="${productEdit.category_id}">${productEdit.categories.get(productEdit.category_id).getName()}</option>
+						 -->
 						<c:forEach items="${productEdit.categories}" var="category">
-							<option value="${category.id}">${category.name}</option>
+							<c:if test='${category.id==productEdit.category_id}'>
+								<option selected value="${category.id}">${category.name}</option>
+							</c:if>
+							
+							<c:if test='${category.id!=productEdit.category_id}'>
+								<option value="${category.id}">${category.name}</option>
+							</c:if>
+							
 						</c:forEach>
 					</select>
 				</div>
