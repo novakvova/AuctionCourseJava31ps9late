@@ -79,16 +79,23 @@ public class RegistrationService implements IRegistrationService {
 		return false;
 	}
 
-	private User findByUsername(String username) {
+	public User findByUsername(String username) {
 		Session session = sessionFactory.openSession();
 		String hql = "FROM User u WHERE u.username = :uname";
 		Query query = session.createQuery(hql);
 		query.setParameter("uname", username);
-		User u = (User) query.getSingleResult();
+		User u;
+		try {
+			u = (User)query.getSingleResult();
+		}
+		catch(Exception ex) {
+			u=null;
+		}
 		return u;
 	}
 	public List<Role> getAllRoles() {
 		Session session = sessionFactory.openSession();
 	    return session.createQuery("SELECT a FROM Role a", Role.class).getResultList();      
 	}
+	
 }
