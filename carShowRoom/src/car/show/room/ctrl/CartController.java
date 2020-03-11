@@ -6,14 +6,19 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import car.show.room.pojo.Item;
 import car.show.room.pojo.Product;
+import car.show.room.pojo.User;
 import car.show.room.service.ProductService;
+import car.show.room.service.RegistrationService;
 
 @Controller
 @RequestMapping(value = "cart")
@@ -21,8 +26,15 @@ public class CartController {
 
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private RegistrationService registerSevice;
+	
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public String index() {
+	public String index(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		System.out.println("user auth"+currentPrincipalName);
+		model.addAttribute("user",registerSevice.findByUsername(currentPrincipalName) != null ? registerSevice.findByUsername(currentPrincipalName):new User());
 		return "cart/index";
 	}
 
@@ -44,6 +56,8 @@ public class CartController {
 			}
 			session.setAttribute("cart", cart);
 		}
+		
+		
 		return "redirect:/cart/index";
 	}
 
