@@ -174,7 +174,7 @@ a img{
   height: 650px;
   width: auto;
   background-color: #f3f3f3;
-  background: url('images/slide01.jpg') center 30% no-repeat;
+  background: url('../images/slide01.jpg') center 30% no-repeat;
   background-size: cover;
 }
 
@@ -301,7 +301,7 @@ a img{
 
 .android-wear-section {
   position: relative;
-  background: url('images/wear.png') center top no-repeat;
+  background: url('../images/wear.png') center top no-repeat;
   background-size: cover;
   height: 800px;
 }
@@ -372,7 +372,7 @@ a img{
   }
 
 .android-customized-section-image {
-  background: url('images/devices.jpg') center top no-repeat;
+  background: url('../images/devices.jpg') center top no-repeat;
   background-size: cover;
   height: 400px;
 }
@@ -538,41 +538,4 @@ a img{
   .android-footer .mdl-mega-footer--bottom-section {
     display: none;
   }
-}
-.content-grid {
-  max-width: 100vw;
-}
-.img_main {
-  width: 35vw;
-  height: 53vh;
-}
-.main_photo{
-  padding-top: 125px;
-
-}
-.info_main {
-  font-family: "Raleway", serif;
-  padding: 75px;
-}
-.mdl-js-ripple-effect {
-  outline: 0;
-  background: none;
-  border: 0px solid #d9d9d9;
-  margin-bottom: 10px;
-  color: #4f0d00;
-  text-transform: uppercase;
-  width: 150px;
-  font-family: inherit;
-  margin-right: 5px;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-.description {
-  max-width: 40vw;
-}
-.content-grid{
-  padding-left: 8vw;
-}
-.mdl-layout__header{
-  background-color: #f7f7f7;
 }
