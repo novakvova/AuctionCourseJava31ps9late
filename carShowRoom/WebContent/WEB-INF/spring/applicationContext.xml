@@ -31,6 +31,9 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.connection.useUnicode">true</prop>
+				<prop key="hibernate.connection.CharSet">utf8</prop>
+				<prop key="hibernate.connection.characterEncoding">utf8</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
@@ -94,6 +97,7 @@
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10000000" />
+		<property name="defaultEncoding" value="utf-8"/>
 	</bean>
 
 </beans>
