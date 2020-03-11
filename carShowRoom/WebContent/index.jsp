@@ -53,11 +53,11 @@
 				<div class="android-navigation-container">
 					<nav class="android-navigation mdl-navigation">
 						<a class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="${pageContext.request.contextPath}/admin/products">Продукти</a> <a
+							href="${pageContext.request.contextPath}/admin/products">Продукти</a>
+						<a class="mdl-navigation__link mdl-typography--text-uppercase"
+							href="${pageContext.request.contextPath}/login">Вхід</a> <a
 							class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">Phones</a> <a
-							class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">Tablets</a> <a
+							href="${pageContext.request.contextPath}/user/registration">Реєстрація</a> <a
 							class="mdl-navigation__link mdl-typography--text-uppercase"
 							href="">TV</a> <a
 							class="mdl-navigation__link mdl-typography--text-uppercase"
@@ -89,7 +89,8 @@
 	<article>
 		<div class="content-grid mdl-grid">
 			<div class="main_photo">
-				<img class="img_main" src="resources/images/laptop.png" alt="main image">
+				<img class="img_main" src="resources/images/laptop.png"
+					alt="main image">
 			</div>
 			<div class="info_main">
 				<h2>Classic Peace Lily</h2>
