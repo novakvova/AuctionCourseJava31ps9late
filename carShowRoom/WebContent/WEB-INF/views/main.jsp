@@ -16,16 +16,18 @@
 	width: 300px;
 }
 
-/* .demo-card-wide>.mdl-card__title { */
-/* 	color: #fff; */
-/* 	height: 300px; */
-/* 	background: url('${product.image}') center/cover; */
-/* } */
-/*  .mdl-layout__header-row { */
-/* margin-bottom: 10px; */
-/* } */
+.demo-card-wide>.mdl-card__title {
+	color: #fff;
+	height: 300px;
+	background: url('${product.image}') center/cover;
+}
+
+.mdl-layout__header-row {
+	margin-bottom: 10px;
+}
+
 .product-wrapper {
-	padding-top: 100px;
+	padding-top: 50px;
 	padding-bottom: 50px;
 }
 
@@ -43,100 +45,65 @@
 }
 
 .category-wrapper {
-	padding-top: 100px;
+	padding-top: 50px;
 }
 
-.item_single {
-	background-color: #fff;
-	float: left;
-	margin: 50px 20px 20px 80px;
-	padding: 10px;
-}
-
-.item_single img {
-	display: block;
-	width: 300px;
-	margin: auto;
-}
-
-.name_cart {
-	font-size: 16px;
-	display: block;
-	border-bottom: 1px solid #ccc;
-	margin: 0 0 10px 0;
-	padding: 0 0 5px 0;
-}
-
-.add-to-cart {
-	border: 1px solid #722A1B;
-	padding: 4px 14px;
-	background-color: #fff;
-	color: #722A1B;
+a {
 	text-transform: uppercase;
-	float: right;
-	font-weight: bold;
-	cursor: pointer;
-	outline: none;
 	text-decoration: none;
 }
+
+.mdl-js-ripple-effect {
+	width: 100%;
+}
+
+.mdl-button {
+	padding: 0;
+}
+/* .category-wrapper{ */
+/* text-align: center;} */
+
 </style>
 
 	<jsp:include page="container/_header.jsp"></jsp:include>
 	<div class="mdl-grid">
 		<div class="mdl-cell mdl-cell--2-col category-wrapper">
-			<ul class="demo-list-item mdl-list">
-				<c:forEach items="${categories}" var="category">
-					<li class="mdl-list__item"><span
-						class="mdl-list__item-primary-content"> ${category.name} </span></li>
-				</c:forEach>
-			</ul>
+		<h3>Категорії</h3>
+			<span class="mdl-chip"> <span class="mdl-chip__text"> <a
+					href="${pageContext.request.contextPath}/admin/main">Усі</a></span>
+			</span><br>
+			<c:forEach items="${categories}" var="category">
+				<%-- 					<input type="checkbox" name="${category.name}" value="${category.id}"> --%>
+				<span class="mdl-chip"> <span class="mdl-chip__text"><a
+						href="${pageContext.request.contextPath}/admin/main${category.id}">${category.name}</a></span>
+				</span>
+				<br>
+			</c:forEach>
 		</div>
 		<div class="mdl-cell mdl-cell--10-col">
 			<div class="product-wrapper">
 				<div class="mdl-grid">
 					<div class="mdl-layout-spacer"></div>
-
 					<c:forEach items="${products}" var="product">
-
-						<!-- 						<div class="mdl-cell mdl-cell---col graybox"> -->
-						<!-- 							<div class="demo-card-wide mdl-card mdl-shadow--2dp item_single""> -->
-						<!-- 								<div class="mdl-card__title" -->
-						<%-- 									style="color: #fff; --%>
-						<!-- 													height: 300px; -->
-						<%-- 													background: url('${product.image}') center/cover;"> --%>
-						<!-- <!-- 													mdl-card__title-text -->
-						<%-- 									<h2 class="name_cart">${product.name}</h2> --%>
-						<!-- 								</div> -->
-						<%-- 								<div class="mdl-card__supporting-text">${product.description}</div> --%>
-						<%-- 								<div class="mdl-card__supporting-text">${product.price}</div> --%>
-						<!-- 								<div class="mdl-card__actions mdl-card--border"> -->
-						<!-- <!-- 									mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect  -->
-						<!-- 									<button type="submit" -->
-						<!-- 										class="add-to-cart">Додати -->
-						<!-- 										в корзину</button> -->
-						<!-- 								</div> -->
-						<!-- 													<div class="mdl-card__menu"> -->
-						<!-- 														<button -->
-						<!-- 															class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect "> -->
-						<!-- 															<i class="material-icons">share</i> -->
-						<!-- 														</button> -->
-						<!-- 													</div> -->
-						<!-- 							</div> -->
-						<!-- 						</div> -->
-
-						<!-- single item -->
 						<div class="mdl-cell mdl-cell---col graybox">
-							<div class="item_single">
-								<img src="${product.image}" alt="item" />
-								<h2 class="name_cart">${product.name}</h2>
-								<p>
-									Price: <em>${product.price}</em>
-								</p>
-								<p>Description: ${product.description}</p>
-								<button class="add-to-cart" type="button">Додати в
-									корзину</button>
+							<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+								<div class="mdl-card__title"
+									style="color: #000;
+											height: 300px; 
+											background: url('${product.image}'), url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png') center;
+											background-size: cover;">
+									<h2 class="mdl-card__title-text">${product.name}</h2>
+								</div>
+								<div class="mdl-card__supporting-text">${product.description}</div>
+								<div class="mdl-card__supporting-text">${product.price}</div>
+								<div class="mdl-card__actions mdl-card--border">
+									<div class="mdl-layout-spacer"></div>
+									<a
+										href="${pageContext.request.contextPath}/cart/buy/${product.id}"
+										class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect ">Додати
+										в корзину</a>
+								</div>
 							</div>
-							<!--/ single item -->
 						</div>
 					</c:forEach>
 					<div class="mdl-layout-spacer"></div>
@@ -144,12 +111,15 @@
 			</div>
 		</div>
 	</div>
-
-
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+		crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function() {
+			$(".mdl-chip").hover(function() {
+				$(this).toggleClass("mdl-color--deep-purple");
+			});
+		});
+	</script>
+	
 	<jsp:include page="container/_footer.jsp"></jsp:include>
-
-</body>
-</html>
-
-
-

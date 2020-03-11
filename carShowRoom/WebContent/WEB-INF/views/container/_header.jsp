@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <header>
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+	<div class="mdl-layout--fixed-header">
 
 		<div
 			class="android-header mdl-layout__header mdl-layout__header--waterfall">
@@ -22,42 +22,23 @@
 						<input class="mdl-textfield__input" type="text" id="search-field">
 					</div>
 				</div>
-				<!-- Navigation -->
+					<!-- Navigation -->
 				<div class="android-navigation-container">
 					<nav class="android-navigation mdl-navigation">
 						<a class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">Smart Watch</a> <a
+							href="${pageContext.request.contextPath}/admin/main">Продукти</a>
+						<a class="mdl-navigation__link mdl-typography--text-uppercase"
+							href="${pageContext.request.contextPath}/login">Вхід</a> <a
 							class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">Phones</a> <a
-							class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">Tablets</a> <a
-							class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">TV</a> <a
-							class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">Laptop</a> <a
-							class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="">Basket (0)</a>
+							href="${pageContext.request.contextPath}/user/registration">Реєстрація</a>
+						<a class="mdl-navigation__link mdl-typography--text-uppercase"
+							href="${pageContext.request.contextPath}/cart/index">Корзина</a>
 					</nav>
 				</div>
 				<span class="android-mobile-title mdl-layout-title"> <img
 					class="android-logo-image" src="../resources/images/Election.png">
 				</span>
 			</div>
-		</div>
-
-		<div class="android-drawer mdl-layout__drawer">
-			<span class="mdl-layout-title"> <img
-				class="android-logo-image"
-				src="../resources/images/whiteElection.png">
-			</span>
-			<nav class="mdl-navigation">
-				<a class="mdl-navigation__link" href="">Smart Watch</a> <a
-					class="mdl-navigation__link" href="">Phones</a> <a
-					class="mdl-navigation__link" href="">Tablets</a> <a
-					class="mdl-navigation__link" href="">TV</a> <a
-					class="mdl-navigation__link" href="">Laptop</a> <a
-					class="mdl-navigation__link" href="">Basket (0)</a>
-			</nav>
 		</div>
 	</div>
 </header>

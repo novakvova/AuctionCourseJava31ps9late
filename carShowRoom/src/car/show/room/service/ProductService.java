@@ -101,7 +101,7 @@ public class ProductService implements IProductService {
 	@Override
 	public List<Product> GetProductsbyCategory(long categoryid) {
 		Session session = sessionFactory.openSession();
-		Query query= session.createQuery("SELECT a FROM Product a where a.category_id=:categoryid");
+		Query query= session.createQuery("SELECT a FROM Product a where a.category.id=:categoryid");
 		query.setParameter("categoryid", categoryid);
 		List<Product> list=query.list();
 		session.close();
