@@ -12,6 +12,18 @@
 <jsp:include page="container/_scripts.jsp"></jsp:include>
 </head>
 <body>
+<style>
+.fix-descr{
+overflow:hidden;
+width: 300px;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: horizontal;
+border-bottom:none !IMPORTANT;
+white-space: normal;
+height:35px !important;
+}
+</style>
 	<div class="container">
 
 		<%
@@ -52,7 +64,7 @@
 							style="width: 50px"></td>
 						<td>${product.id}</td>
 						<td>${product.name}</td>
-						<td>${product.description}</td>
+						<td  class="fix-descr">${product.description}</td>
 						<td>${product.price}</td>
 						<td>${product.category.name}</td>
 						<td><a
