@@ -63,6 +63,18 @@ a {
 /* .category-wrapper{ */
 /* text-align: center;} */
 
+
+.fix-descr{
+oveflow:hidden;
+height: 40px;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
+}
+.fix-title{
+    font-weight: 700;
+    font-size: 20px;
+}
 </style>
 
 	<jsp:include page="container/_header.jsp"></jsp:include>
@@ -92,9 +104,9 @@ a {
 											height: 300px; 
 											background: url('${product.image}'), url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png') center;
 											background-size: cover;">
-									<h2 class="mdl-card__title-text">${product.name}</h2>
 								</div>
-								<div class="mdl-card__supporting-text">${product.description}</div>
+									<div class="mdl-card__supporting-text fix-title">${product.name}</div>
+								<div class="mdl-card__supporting-text fix-descr">${product.description}</div>
 								<div class="mdl-card__supporting-text">${product.price}</div>
 								<div class="mdl-card__actions mdl-card--border">
 									<div class="mdl-layout-spacer"></div>
