@@ -20,36 +20,35 @@ import validation.EmailExistsException;
 
 @Controller
 public class RegisterCtrl {
-	//@Resource(name = "registrationService")
+	// @Resource(name = "registrationService")
 	@Autowired
 	private RegistrationService registrationService;
-	
+
 	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
 	public String showRegistrationForm(WebRequest request, Model model) {
-	    UserDTO userDto = new UserDTO();
-	    model.addAttribute("user", userDto);
-	    return "registration";
+		UserDTO userDto = new UserDTO();
+		model.addAttribute("user", userDto);
+		return "registration";
 	}
+
 	@RequestMapping(value = "/user/registration", method = RequestMethod.POST)
-	public ModelAndView registerUserAccount
-	      (@ModelAttribute("user")  UserDTO accountDto, 
-	      BindingResult result, WebRequest request, Errors errors) {    
-	    User registered = new User();
+	public ModelAndView registerUserAccount(@ModelAttribute("user") UserDTO accountDto, BindingResult result,
+			WebRequest request, Errors errors) {
+		User registered = new User();
 		System.out.println(accountDto.toString());
 		registered = createUserAccount(accountDto, result);
-
-	        return new ModelAndView("successRegister", "user", accountDto);
+		return new ModelAndView("login", "user", accountDto);
 
 	}
+
 	private User createUserAccount(UserDTO accountDto, BindingResult result) {
-	    User registered = null;
-	    try {
-	        registered = registrationService.registerNewUserAccount(accountDto);
-	    } catch (EmailExistsException e) {
-	        return null;
-	    }    
-	    return registered;
+		User registered = null;
+		try {
+			registered = registrationService.registerNewUserAccount(accountDto);
+		} catch (EmailExistsException e) {
+			return null;
+		}
+		return registered;
 	}
-	
-}
 
+}

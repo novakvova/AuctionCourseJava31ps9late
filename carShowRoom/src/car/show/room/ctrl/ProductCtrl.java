@@ -166,8 +166,17 @@ public class ProductCtrl {
 	@RequestMapping(value = "/main{id}", method = RequestMethod.GET)
 	public String showMainPageCat(@PathVariable("id") String id,WebRequest request, Model model) {
 		model.addAttribute("products", productService.GetProductsbyCategory(Long.parseLong(id)));
+		model.addAttribute("currentCategory",categoryService.GetById(Long.parseLong(id)));
 		model.addAttribute("categories", categoryService.GetAllCategories());
 		return "main";
+	}
+	
+	@RequestMapping(value = "/main/details/{id}", method = RequestMethod.GET)
+	public String showProductDetails(@PathVariable("id") String id,WebRequest request, Model model) {
+		//model.addAttribute("products", productService.GetProductsbyCategory(Long.parseLong(id)));
+		model.addAttribute("product",productService.GetById(Long.parseLong(id)));
+	//	model.addAttribute("categories", categoryService.GetAllCategories());
+		return "details";
 	}
 
 }
