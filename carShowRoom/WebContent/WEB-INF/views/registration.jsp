@@ -6,6 +6,7 @@
 <jsp:include page="container/_link-css.jsp"></jsp:include>
 <jsp:include page="container/_scripts.jsp"></jsp:include>
 <body>
+<jsp:include page="container/_header.jsp"></jsp:include>
 	<div class="mdl-grid">
 		<div class="mdl-layout-spacer"></div>
 		<h1>Registration</h1>
