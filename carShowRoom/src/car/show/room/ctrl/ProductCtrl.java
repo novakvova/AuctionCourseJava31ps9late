@@ -70,7 +70,7 @@ public class ProductCtrl {
 		System.out.println(filePath + name);
 
 		file.transferTo(new File(filePath + name));
-		productDTO.setImage("../resources/images/" + name);
+		productDTO.setImage(name);
 		System.out.println(productDTO.toString());
 		Product prod = new Product();
 		prod = createProduct(productDTO, result);
@@ -116,7 +116,7 @@ public class ProductCtrl {
 			file.transferTo(new File(filePath + name));
 		}
 
-		productDTO.setImage("../resources/images/" + name);
+		productDTO.setImage(name);
 		System.out.println(productDTO.toString());
 
 		System.out.println(productDTO.toString());
@@ -177,6 +177,14 @@ public class ProductCtrl {
 		model.addAttribute("product",productService.GetById(Long.parseLong(id)));
 	//	model.addAttribute("categories", categoryService.GetAllCategories());
 		return "details";
+	}
+	@RequestMapping(value = "/main/search", method = RequestMethod.GET)
+	public String showProductSearch(@RequestParam("searchString") String searchString,WebRequest request, Model model) {
+		//model.addAttribute("products", productService.GetProductsbyCategory(Long.parseLong(id)));
+		System.out.println("name "+searchString);
+		model.addAttribute("products",productService.SearchProduct(searchString));
+		model.addAttribute("categories", categoryService.GetAllCategories());
+		return "main";
 	}
 
 }

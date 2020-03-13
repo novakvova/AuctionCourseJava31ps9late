@@ -116,7 +116,7 @@ a {
 									<div class="mdl-card__title"
 										style="color: #000;
 											height: 300px; 
-											background: url('${product.image}'), url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png') center;
+											background: url('${pageContext.request.contextPath}/resources/images/${product.image}'), url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png') center;
 											background-size: cover;">
 									</div>
 									<div class="mdl-card__supporting-text fix-title">${product.name}</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <header>
 	<div class="mdl-layout--fixed-header">
 
@@ -9,7 +10,8 @@
 				<span class="android-title mdl-layout-title"> <a
 					class="mdl-navigation__link mdl-typography--text-uppercase"
 					href="${pageContext.request.contextPath}/"> <img
-						class="android-logo-image" src="../resources/images/Election.png"></a>
+						class="android-logo-image"
+						src="${pageContext.request.contextPath}/resources/images/Election.png"></a>
 				</span>
 				<!-- Add spacer, to align navigation to the right in desktop -->
 				<div class="android-header-spacer mdl-layout-spacer"></div>
@@ -19,10 +21,20 @@
 						for="search-field"> <i class="material-icons">search</i>
 					</label>
 					<div class="mdl-textfield__expandable-holder">
-						<input class="mdl-textfield__input" type="text" id="search-field">
+						<form name="form"
+						enctype="multipart/form-data"
+							action="${pageContext.request.contextPath}/admin/main/search${searchString}"
+							method="get">
+							<!-- 						<input class="mdl-textfield__input" type="text"  name="name"id="search-field"> -->
+
+
+							<input class="mdl-textfield__input" id="search-field" type="text"
+								name="searchString" /> <input hidden
+								type="submit" value="Submit" />
+						</form>
 					</div>
 				</div>
-					<!-- Navigation -->
+				<!-- Navigation -->
 				<div class="android-navigation-container">
 					<nav class="android-navigation mdl-navigation">
 						<a class="mdl-navigation__link mdl-typography--text-uppercase"

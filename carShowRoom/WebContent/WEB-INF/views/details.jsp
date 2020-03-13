@@ -12,64 +12,8 @@
 <jsp:include page="container/_scripts.jsp"></jsp:include>
 </head>
 <body>
-<header>
-	<div class="mdl-layout--fixed-header">
-
-		<div
-			class="android-header mdl-layout__header mdl-layout__header--waterfall">
-			<div class="mdl-layout__header-row">
-				<span class="android-title mdl-layout-title"> <a
-					class="mdl-navigation__link mdl-typography--text-uppercase"
-					href="${pageContext.request.contextPath}/"> <img
-						class="android-logo-image" src="../../../resources/images/Election.png"></a>
-				</span>
-				<!-- Add spacer, to align navigation to the right in desktop -->
-				<div class="android-header-spacer mdl-layout-spacer"></div>
-				<div
-					class="android-search-box mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right mdl-textfield--full-width">
-					<label class="mdl-button mdl-js-button mdl-button--icon"
-						for="search-field"> <i class="material-icons">search</i>
-					</label>
-					<div class="mdl-textfield__expandable-holder">
-						<input class="mdl-textfield__input" type="text" id="search-field">
-					</div>
-				</div>
-					<!-- Navigation -->
-				<div class="android-navigation-container">
-					<nav class="android-navigation mdl-navigation">
-						<a class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="${pageContext.request.contextPath}/admin/main">Продукти</a>
-						<a class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="${pageContext.request.contextPath}/login">Вхід</a> <a
-							class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="${pageContext.request.contextPath}/user/registration">Реєстрація</a>
-						<a class="mdl-navigation__link mdl-typography--text-uppercase"
-							href="${pageContext.request.contextPath}/cart/index">Корзина</a>
-					</nav>
-				</div>
-				<span class="android-mobile-title mdl-layout-title"> <img
-					class="android-logo-image" src="../resources/images/Election.png">
-				</span>
-			</div>
-		</div>
-	</div>
-</header>
+	<jsp:include page="container/_header.jsp"></jsp:include>
 	<style>
-	
-.demo-card-wide.mdl-card {
-	width: 512px;
-}
-
-.demo-card-wide>.mdl-card__title {
-	color: #fff;
-	height: 300px;
-	background: url('../../${productDelete.image}') center/cover;
-}
-
-.demo-card-wide>.mdl-card__menu {
-	color: #fff;
-}
-
 .mdl-js-ripple-effect {
 	width: 100%;
 }
@@ -107,7 +51,9 @@
 			<div class="mdl-tabs__panel is-active" id="all-panel">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--8-col">
-						<img src="../../${product.image}" width="720px" height="470px"
+						<img
+							src="${pageContext.request.contextPath}/resources/images/${product.image}"
+							width="720px" height="470px"
 							onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png';" />
 					</div>
 					<div class="mdl-cell mdl-cell---col">
@@ -129,7 +75,9 @@
 				<div class="mdl-card__supporting-text">${product.description}</div>
 			</div>
 			<div class="mdl-tabs__panel" id="photo-panel">
-				<img src="../../${product.image}" width="300px"
+				<img
+					src="${pageContext.request.contextPath}/resources/images/${product.image}"
+					width="300px"
 					onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png';" />
 			</div>
 		</div>

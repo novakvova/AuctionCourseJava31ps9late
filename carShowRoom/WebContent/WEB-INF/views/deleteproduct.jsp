@@ -21,15 +21,23 @@
 .demo-card-wide>.mdl-card__title {
 	color: #fff;
 	height: 300px;
-	background: url('../../${productDelete.image}') center/cover;
+	background: url('${pageContext.request.contextPath}/resources/images/${productDelete.image}') center/cover;
 }
 
 .demo-card-wide>.mdl-card__menu {
 	color: #fff;
 }
+.fix-title {
+	font-weight: 700;
+	font-size: 20px;
+	color: #000;
+}
 </style>
 
 	<div class="mdl-grid">
+	<a href="${pageContext.request.contextPath}/admin/products"
+				class="mdl-button mdl-js-button mdl-button--raised mdl-color--primary">
+				Назад </a>
 		<div class="mdl-layout-spacer"></div>
 		<h1>Видалити товар</h1>
 		<div class="mdl-layout-spacer"></div>
@@ -41,9 +49,9 @@
 			action="${pageContext.request.contextPath}/admin/products/delete/${productDelete.id}"
 			method="post" modelAttribute="productDelete">
 			<div class="demo-card-wide mdl-card mdl-shadow--2dp">
-				<div class="mdl-card__title">
-					<h2 class="mdl-card__title-text">${productDelete.name}</h2>
+				<div class="mdl-card__title">				
 				</div>
+				<div class="mdl-card__supporting-text fix-title">${productDelete.name}</div>
 				<div class="mdl-card__supporting-text">${productDelete.description}</div>
 				<div class="mdl-card__supporting-text">${productDelete.price}</div>
 				<div class="mdl-card__actions mdl-card--border">
