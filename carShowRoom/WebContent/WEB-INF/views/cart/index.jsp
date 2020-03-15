@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <title>Cart Page</title>
 <jsp:include page="../container/_link-css.jsp"></jsp:include>
 <link rel="stylesheet"
@@ -73,7 +73,7 @@
 			style="margin-top: 100px">
 			<div
 				class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
-				<form:form action="#" modelAttribute="user">
+				<form:form action="${pageContext.request.contextPath }/cart/order" modelAttribute="user">
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<form:input path="name" class="mdl-textfield__input" type="Ім'я" id="name-client"/>
@@ -90,6 +90,12 @@
 						<form:input path="phone" class="mdl-textfield__input" type="Номер телефону"
 							id="phone-client"/> <label class="mdl-textfield__label"
 							for="name-client">Номер телефону</label>
+					</div>
+					<div
+						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<form:input path="username" class="mdl-textfield__input"  type="Пошта"/>
+						 <label class="mdl-textfield__label"
+							for="name-client">Пошта</label>
 					</div>
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
