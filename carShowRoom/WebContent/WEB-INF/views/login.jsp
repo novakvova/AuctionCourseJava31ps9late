@@ -48,12 +48,12 @@
 			<div class="mdl-card__supporting-text">
 				<form name="loginform" action="<c:url value='/login'/>"
 					method="POST">
-					<div class="mdl-textfield mdl-js-textfield">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<input class="mdl-textfield__input" name="username" type="text"
 							id="username"> <label class="mdl-textfield__label"
 							for="username">Email:</label>
 					</div>
-					<div class="mdl-textfield mdl-js-textfield ">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 						<label class="mdl-textfield__label" path="password">Password</label>
 						<input class="mdl-textfield__input" type="password" name="password"
 							path="password" />

@@ -19,33 +19,33 @@
 				<h2 class="mdl-card__title-text">ELECTION</h2>
 			</div>
 			<form:form method="POST" enctype="utf8" modelAttribute="user">
-				<div class="mdl-textfield mdl-js-textfield">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<input class="mdl-textfield__input" name="username" type="text"
 						id="username"> <label class="mdl-textfield__label"
 						for="username">Username</label>
 				</div>
-				<div class="mdl-textfield mdl-js-textfield ">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ">
 					<form:label class="mdl-textfield__label" path="password">Password</form:label>
 					<form:input class="mdl-textfield__input" type="password"
 						path="password" />
 				</div>
-				<div class="mdl-textfield mdl-js-textfield ">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<form:label class="mdl-textfield__label" path="role">Role</form:label>
 					<form:input class="mdl-textfield__input" path="role" />
 				</div>
-				<div class="mdl-textfield mdl-js-textfield">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<form:label class="mdl-textfield__label" path="name">Name</form:label>
 					<form:input class="mdl-textfield__input" path="name" />
 				</div>
-				<div class="mdl-textfield mdl-js-textfield">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
 					<form:label class="mdl-textfield__label" path="surname">Surname</form:label>
 					<form:input class="mdl-textfield__input" path="surname" />
 				</div>
-				<div class="mdl-textfield mdl-js-textfield ">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<form:label class="mdl-textfield__label" path="delivery">Delivery</form:label>
 					<form:input class="mdl-textfield__input" path="delivery" />
 				</div>
-				<div class="mdl-textfield mdl-js-textfield ">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<form:label class="mdl-textfield__label" path="phone">Phone</form:label>
 					<form:input class="mdl-textfield__input" path="phone" />
 				</div>
