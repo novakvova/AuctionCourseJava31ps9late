@@ -9,8 +9,16 @@
    			         http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 	<http auto-config="true">
-		<intercept-url pattern="/admin**"
-			access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin** "	access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/* "	access="hasRole('ROLE_ADMIN')" />
+		
+		<intercept-url pattern="/admin/products/* "	access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/products/add/* "	access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/products/delete/* "	access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/products/delete/**/* "	access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/products/edit/* "	access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/products/edit/**/* "	access="hasRole('ROLE_ADMIN')" />
+		
 
 		<!-- user-defined login form redirection -->
 		<form-login login-page="/login" default-target-url="/admin/products"
