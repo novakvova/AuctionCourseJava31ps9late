@@ -58,7 +58,7 @@
 					</c:forEach>
 					<tr>
 						<td><a
-							href="${pageContext.request.contextPath }/admin/products">Back</a></td>
+							href="${pageContext.request.contextPath }/admin/main">Back</a></td>
 						<td colspan="3" align="right">Sum</td>
 						<td>$${total }</td>
 					</tr>
