@@ -32,10 +32,14 @@
 </head>
 
 <body>
-	<div class="mdl-grid">
+	<div class="mdl-grid">	
+	<a href="${pageContext.request.contextPath}/admin/products"
+				class="mdl-button mdl-js-button mdl-button--raised mdl-color--primary">
+				Назад </a>
 		<div class="mdl-layout-spacer"></div>
 		<h1>Додати товар</h1>
 		<div class="mdl-layout-spacer"></div>
+	
 	</div>
 	<div class="mdl-grid">
 		<div class="mdl-layout-spacer"></div>
@@ -45,17 +49,17 @@
 		<div class="mdl-cell mdl-cell---col">
 			<form:form method="POST" enctype="multipart/form-data"
 				modelAttribute="product">
-				<div class="mdl-textfield mdl-js-textfield">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<form:label class="mdl-textfield__label" path="name">Name</form:label>
 					<form:input class="mdl-textfield__input" path="name" />
 				</div>
-				<div class="mdl-textfield mdl-js-textfield">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<form:label class="mdl-textfield__label" path="price">Price</form:label>
 					<form:input class="mdl-textfield__input" path="price" />
 				</div>
-				<div class="mdl-textfield mdl-js-textfield">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 					<form:label class="mdl-textfield__label" path="description">Description</form:label>
-					<form:input class="mdl-textfield__input" path="description" />
+					<form:textarea  class="mdl-textfield__input" path="description" />
 				</div>
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
 					<form:input class="mdl-textfield__input" path="image"

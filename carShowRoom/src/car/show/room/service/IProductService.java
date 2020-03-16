@@ -9,14 +9,19 @@ import car.show.room.pojo.ProductDTO;
 import car.show.room.pojo.product.ProductEditDTO;
 
 public interface IProductService {
-	
-	 Product AddProduct(ProductDTO productdto);     
 
-	 //List<Category> GetAllCategories();
-	 List<Product> GetAllProducts();
-	 Product GetById(long id);
-	 void Delete(long id);
-	 void Update(ProductEditDTO productDTO);
-	 
-	 List<Product> GetProductsbyCategory(long categoryid);
+	Product AddProduct(ProductDTO productdto);
+
+	// List<Category> GetAllCategories();
+	List<Product> GetAllProducts();
+
+	Product GetById(long id);
+
+	void Delete(long id);
+
+	void Update(ProductEditDTO productDTO);
+
+	List<Product> GetProductsbyCategory(long categoryid);
+
+	List<Product> SearchProduct(String name);
 }

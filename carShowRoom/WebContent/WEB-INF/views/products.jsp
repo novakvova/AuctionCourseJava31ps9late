@@ -6,12 +6,24 @@
 <head>
 <title>Products</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<jsp:include page="container/_link-css.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.indigo-pink.min.css">
-<jsp:include page="container/_scripts.jsp"></jsp:include>
+<jsp:include page="container/_link-css.jsp"></jsp:include>
 </head>
 <body>
+<style>
+.fix-descr{
+overflow:hidden;
+width: 300px;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: horizontal;
+border-bottom:none !IMPORTANT;
+white-space: normal;
+height:35px !important;
+}
+</style>
+<jsp:include page="container/_header.jsp"></jsp:include>
 	<div class="container">
 
 		<%
@@ -47,12 +59,12 @@
 				</tr>
 				<c:forEach items="${products}" var="product">
 					<tr>
-						<td><img src="${product.image}"
+						<td><img src="${pageContext.request.contextPath}/resources/images/${product.image}"
 							onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png';"
 							style="width: 50px"></td>
 						<td>${product.id}</td>
 						<td>${product.name}</td>
-						<td>${product.description}</td>
+						<td  class="fix-descr">${product.description}</td>
 						<td>${product.price}</td>
 						<td>${product.category.name}</td>
 						<td><a
@@ -71,5 +83,6 @@
 			<div class="mdl-layout-spacer"></div>
 		</div>
 	</div>
+	<jsp:include page="container/_scripts.jsp"></jsp:include>
 </body>
 </html>

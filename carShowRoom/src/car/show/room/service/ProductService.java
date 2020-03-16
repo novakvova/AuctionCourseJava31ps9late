@@ -107,5 +107,15 @@ public class ProductService implements IProductService {
 		session.close();
 		return list;
 	}
+	@Override
+	public List<Product> SearchProduct(String name) {
+		Session session = sessionFactory.openSession();
+		Query query= session.createQuery("SELECT a FROM Product a  WHERE a.name LIKE :name OR a.description LIKE :name"  ); 
+		query.setParameter("name","%"+name+"%");
+		List<Product> list=query.list();
+		session.close();
+		return list;
+	}
+	
 
 }

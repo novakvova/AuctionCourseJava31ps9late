@@ -46,8 +46,8 @@
 							value="${total + item.product.price * item.quantity }"></c:set>
 						<tr>
 							<td><img class="mdl-data-table__cell--non-numeric"
-								src="${item.product.image}" width="50"></td>
-							<td>${item.product.name }</td>
+								src="${pageContext.request.contextPath}/resources/images/${item.product.image}" width="50"></td>
+							<td>${item.product.name}</td>
 							<td>$${item.product.price }</td>
 							<td>${item.quantity }</td>
 							<td>$${item.product.price * item.quantity }</td>
